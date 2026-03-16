@@ -46,8 +46,7 @@ function ScoreBoard({ moves, matchedCount, totalPairs, time, onReset }) {
 
       {matchedCount === totalPairs && (
         <div className="mt-4 w-full max-w-xl mx-auto bg-gradient-to-r from-purple-600/40 to-pink-500/30 border border-yellow-400 rounded-xl p-3 text-center text-yellow-300 text-lg font-bold shadow-lg">
-          🎉 SELAMAT !🎉 <br />
-          Kamu Selesai dalam Waktu {formatTime()} dengan {moves}x Percobaan
+          🎉 Selamat! Selesai dalam waktu {formatTime()} dengan {moves} percobaan!
         </div>
       )}
 

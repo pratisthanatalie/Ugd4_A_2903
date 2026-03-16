@@ -3,19 +3,19 @@
 import React, { useState, useEffect } from "react";
 import GameBoard from "../components/GameBoard";
 import ScoreBoard from "../components/ScoreBoard";
-import { GiCardJoker } from "react-icons/gi";
-import { FaAppleAlt, FaLemon, FaHeart, FaStar } from "react-icons/fa";
+import {GiCardJoker} from "react-icons/gi";
+import {FaAppleAlt,FaLemon,FaHeart,FaStar,FaBolt,FaGem,FaLeaf,FaSun} from "react-icons/fa";
 import confetti from "canvas-confetti";
 
 const ICONS = [
-  { icon: FaAppleAlt, color: "#ef4444" },
-  { icon: FaLemon, color: "#facc15" },
-  { icon: FaHeart, color: "#ec4899" },
-  { icon: FaStar, color: "#fb923c" },
-  { icon: FaAppleAlt, color: "#22c55e" },
-  { icon: FaLemon, color: "#38bdf8" },
-  { icon: FaHeart, color: "#c084fc" },
-  { icon: FaStar, color: "#fb7185" },
+  { icon: FaAppleAlt, color: "#ef4444" }, 
+  { icon: FaLemon, color: "#facc15" }, 
+  { icon: FaHeart, color: "#ec4899" }, 
+  { icon: FaStar, color: "#fb923c" }, 
+  { icon: FaBolt, color: "#3b82f6" }, 
+  { icon: FaGem, color: "#a855f7" }, 
+  { icon: FaLeaf, color: "#22c55e" }, 
+  { icon: FaSun, color: "#f97316" }, 
 ];
 
 const shuffleArray = (array) => {
