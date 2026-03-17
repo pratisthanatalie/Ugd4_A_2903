@@ -24,7 +24,7 @@ function Card({ card, isFlipped, isMatched, onFlip }) {
   active:scale-95
   shadow-[0_0_15px_rgba(255,255,255,0.6)]
   hover:shadow-[0_0_25px_rgba(59,130,246,0.9)]
-  ${isMatched ? "ring-2 ring-cyan-400" : ""}
+  ${isMatched ? "ring-2 ring-blue-400" : ""}
 `;
 
   return (
