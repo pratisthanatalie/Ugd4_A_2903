@@ -1,19 +1,25 @@
 import React from "react";
 import { FaClock, FaMousePointer, FaCheck, FaSyncAlt, FaRedo } from "react-icons/fa";
 
+// function ScoreBoard({ moves, matchedCount, totalPairs, onReset }) {
+//   const isGameComplete = matchedCount === totalPairs;
+
 function ScoreBoard({ moves, matchedCount, totalPairs, time, onReset }) {
   const isComplete = matchedCount === totalPairs;
 
+  //adding format time
   const formatTime = () => {
-    const minutes = Math.floor(time / 60);
+    const minutes = Math.floor(time / 60); //hitung by detik
     const seconds = time % 60;
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`; //ubah format :
   };
 
+  //adding 1 statistik lagi (waktu)
+  //bg-white/20 backdrop-blur-sm rounded-lg
   return (
     <div className="text-center mb-8">
       {/* 3 statistik */}
-      <div className="grid grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-3 gap-6 mb-6"> 
         {/* waktu */}
         <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-5 shadow-lg">
           <p className="flex items-center justify-center gap-2 text-cyan-200 text-sm tracking-wide">
@@ -22,7 +28,7 @@ function ScoreBoard({ moves, matchedCount, totalPairs, time, onReset }) {
           </p>
           <p className="text-3xl font-bold text-white mt-2">{formatTime()}</p>
         </div>
-
+    
         {/* percobaan */}
         <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-5 shadow-lg">
           <p className="flex items-center justify-center gap-2 text-yellow-200 text-sm tracking-wide">
@@ -51,6 +57,7 @@ function ScoreBoard({ moves, matchedCount, totalPairs, time, onReset }) {
       )}
 
       {/* tombol reset */}
+      {/* add warna ungu dan border kuning */}
       <button
         onClick={onReset}
         className="

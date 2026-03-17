@@ -1,7 +1,7 @@
 import React from "react";
+import { FaQuestion } from "react-icons/fa";
 
 function Card({ card, isFlipped, isMatched, onFlip }) {
-  const Icon = card.icon;
 
   const handleClick = () => {
     if (!isFlipped && !isMatched) {
@@ -9,28 +9,35 @@ function Card({ card, isFlipped, isMatched, onFlip }) {
     }
   };
 
+  const isOpen = isFlipped || isMatched;
+  const IconComponent = card.icon;
+
+  //adding normal white shadow normal | cyan ring kalo matched
+  const cardClass = `
+  w-24 h-24
+  cursor-pointer
+  perspective
+  transform
+  transition
+  duration-300
+  hover:scale-110
+  active:scale-95
+  shadow-[0_0_15px_rgba(255,255,255,0.6)]
+  hover:shadow-[0_0_25px_rgba(59,130,246,0.9)]
+  ${isMatched ? "ring-2 ring-green-400" : ""}
+`;
+
   return (
-    <div
-      onClick={handleClick}
-      className="
-        w-24 h-24
-        cursor-pointer
-        perspective
-        transform
-        transition
-        duration-300
-        hover:scale-110
-        active:scale-95
-        hover:shadow-2xl
-        hover:shadow-blue-400/40
-      "
-    >
+    //card container,terima event klik
+    <div onClick={handleClick} className={cardClass}>
       <div
+      //card inner, bagian melakukan flipping
         className={`relative w-full h-full transition-transform duration-500 ${
-          isFlipped || isMatched ? "rotate-y-180" : ""
+          isOpen ? "rotate-y-180" : ""
         }`}
         style={{ transformStyle: "preserve-3d" }}
       >
+
         {/* kartu depan */}
         <div
           className="
@@ -50,9 +57,9 @@ function Card({ card, isFlipped, isMatched, onFlip }) {
             shadow-lg
             hover:shadow-cyan-400/40
           "
-          style={{ backfaceVisibility: "hidden" }}
+          style={{ backfaceVisibility: "hidden" }} //saat kartu depan terlihat, kartu belakang disembunyikan
         >
-          ?
+          <FaQuestion />
         </div>
 
         {/* kartu belakang */}
@@ -73,9 +80,13 @@ function Card({ card, isFlipped, isMatched, onFlip }) {
             transform: "rotateY(180deg)",
             backfaceVisibility: "hidden",
           }}
-        >
-          <Icon style={{ color: card.color }} />
+          //tampilin icon sesuai dengan data kartu, dengan animasi bounce saat dibuka
+        > 
+          <span className={isFlipped ? "animate-bounce-once" : ""}>
+            <IconComponent style={{ color: card.color }} />
+          </span>
         </div>
+
       </div>
     </div>
   );

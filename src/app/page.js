@@ -4,9 +4,16 @@ import React, { useState, useEffect } from "react";
 import GameBoard from "../components/GameBoard";
 import ScoreBoard from "../components/ScoreBoard";
 import {GiCardJoker} from "react-icons/gi";
+// import { FaAppleAlt, FaLemon, FaHeart, FaStar } from "react-icons/fa";
 import {FaAppleAlt,FaLemon,FaHeart,FaStar,FaBolt,FaGem,FaLeaf,FaSun} from "react-icons/fa";
 import confetti from "canvas-confetti";
 
+// const ICONS = [
+//   { icon: FaAppleAlt, color: "#ef4444" },
+//   { icon: FaLemon, color: "#eab308" },
+//   { icon: FaHeart, color: "#ec4899" },
+//   { icon: FaStar, color: "#f97316" },
+// ];
 const ICONS = [
   { icon: FaAppleAlt, color: "#ef4444" }, 
   { icon: FaLemon, color: "#facc15" }, 
@@ -36,6 +43,19 @@ const createCards = (pairs) => {
   return shuffleArray(paired);
 };
 
+// export default function Home() {
+//   const [cards, setCards] = useState([]);
+
+//   const [flippedCards, setFlippedCards] = useState([]);
+
+//   const [matchedCards, setMatchedCards] = useState([]);
+
+//   const [moves, setMoves] = useState(0);
+
+//   useEffect(() => {
+//     setCards(createCards());
+//   }, []);
+
 export default function Home() {
   const [mounted, setMounted] = useState(false);
 
@@ -47,6 +67,7 @@ export default function Home() {
   const [time, setTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
+// adding
   const changeDifficulty = (level) => {
     setDifficulty(level);
     setCards(createCards(level));
@@ -63,6 +84,7 @@ export default function Home() {
     changeDifficulty(4);
   }, []);
 
+//adding
   useEffect(() => {
     let timer;
     if (isPlaying) {
@@ -103,6 +125,7 @@ export default function Home() {
     }
   };
 
+ //adding 
   useEffect(() => {
     if (matchedCards.length === cards.length && cards.length > 0) {
       setIsPlaying(false);
@@ -114,6 +137,13 @@ export default function Home() {
       });
     }
   }, [matchedCards, cards]);
+
+// const resetGame = () => {
+//   setCards(createCards());
+//   setFlippedCards([]);
+//   setMatchedCards([]);
+//   setMoves(0);
+// };
 
   const resetGame = () => {
     setCards(createCards(difficulty));
@@ -135,7 +165,7 @@ export default function Home() {
         mb-6
         bg-gradient-to-r
         from-white
-        via-blue-200
+        via-blue-200 
         to-cyan-400
         bg-clip-text
         text-transparent
@@ -144,7 +174,7 @@ export default function Home() {
         items-center
         gap-3
         drop-shadow-lg
-        "
+        " //awalnya indigo via purple to-pink
       >
         <GiCardJoker className="text-yellow-400 text-5xl" />
         Memory Card
@@ -204,3 +234,4 @@ export default function Home() {
     </div>
   );
 }
+//sb-gb gadirubah samsek
