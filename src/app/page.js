@@ -34,7 +34,7 @@ const shuffleArray = (array) => {
   return shuffled;
 };
 
-const createCards = (pairs) => {
+const createCards = (pairs) => { /*ambil icon sesuai jumlah pairs, lalu buat 2 kartu untuk tiap icon dengan id unik, lalu acak */
   const selected = ICONS.slice(0, pairs);
   const paired = selected.flatMap((item, index) => [
     { id: index * 2, icon: item.icon, color: item.color, pairId: index },
@@ -42,19 +42,6 @@ const createCards = (pairs) => {
   ]);
   return shuffleArray(paired);
 };
-
-// export default function Home() {
-//   const [cards, setCards] = useState([]);
-
-//   const [flippedCards, setFlippedCards] = useState([]);
-
-//   const [matchedCards, setMatchedCards] = useState([]);
-
-//   const [moves, setMoves] = useState(0);
-
-//   useEffect(() => {
-//     setCards(createCards());
-//   }, []);
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -68,28 +55,29 @@ export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false);
 
 // adding
-  const changeDifficulty = (level) => {
-    setDifficulty(level);
-    setCards(createCards(level));
-    if (!isPlaying) setIsPlaying(true);
+  const changeDifficulty = (level) => { 
+    setDifficulty(level); //simpan level
+    setCards(createCards(level)); //buat kartu
+    if (!isPlaying) setIsPlaying(true); //set mulai
+    //reset semua state
     setFlippedCards([]);
     setMatchedCards([]);
     setMoves(0);
     setTime(0);
     setIsPlaying(true);
   };
-
+  //jalankan sekali saat awal
   useEffect(() => {
     setMounted(true);
     changeDifficulty(4);
   }, []);
 
-//adding
+// jalankan timer saat isPlaying true, bersihkan saat false
   useEffect(() => {
     let timer;
     if (isPlaying) {
       timer = setInterval(() => {
-        setTime((prev) => prev + 1);
+        setTime((prev) => prev + 1); //tambah 1 setiap detik
       }, 1000);
     }
     return () => clearInterval(timer);
@@ -97,16 +85,18 @@ export default function Home() {
 
   useEffect(() => {
     if (flippedCards.length === 2) {
+      //ambil data kartu yang dibalik(2)
       const [firstId, secondId] = flippedCards;
       const firstCard = cards.find((c) => c.id === firstId);
       const secondCard = cards.find((c) => c.id === secondId);
-
+      // moves bertambah
       setMoves((prev) => prev + 1);
-
+      //bandingkan kondisi setelahnya
       if (firstCard.pairId === secondCard.pairId) {
         setMatchedCards((prev) => [...prev, firstId, secondId]);
         setFlippedCards([]);
       } else {
+        //tutup lagi setelah delay 0.8 detik
         setTimeout(() => {
           setFlippedCards([]);
         }, 800);
@@ -117,6 +107,7 @@ export default function Home() {
   const handleCardFlip = (id) => {
     if (!isPlaying) setIsPlaying(true);
     if (
+      //validasi-validasi
       flippedCards.length < 2 &&
       !flippedCards.includes(id) &&
       !matchedCards.includes(id)
@@ -125,11 +116,12 @@ export default function Home() {
     }
   };
 
- //adding 
+ //deteksi selesai
   useEffect(() => {
     if (matchedCards.length === cards.length && cards.length > 0) {
+      //stop
       setIsPlaying(false);
-
+      //tampilkan confetti
       confetti({
         particleCount: 150,
         spread: 80,
@@ -182,9 +174,9 @@ export default function Home() {
 
       <div className="flex gap-4 mb-6">
         <button
-          onClick={() => changeDifficulty(4)}
+          onClick={() => changeDifficulty(4)} //klik,ganti level
           className={`px-4 py-2 rounded-full font-bold transition transform ${
-            difficulty === 4
+            difficulty === 4 //perubahan tombol/aktif or no
               ? "bg-green-400 text-black scale-110 shadow-xl"
               : "bg-gray-700 hover:bg-gray-600 hover:scale-105"
           }`}

@@ -12,7 +12,7 @@ function Card({ card, isFlipped, isMatched, onFlip }) {
   const isOpen = isFlipped || isMatched;
   const IconComponent = card.icon;
 
-  //adding normal white shadow normal | cyan ring kalo matched
+  //hover,white shadow,cyan ring
   const cardClass = `
   w-24 h-24
   cursor-pointer
@@ -33,9 +33,9 @@ function Card({ card, isFlipped, isMatched, onFlip }) {
       <div
       //card inner, bagian melakukan flipping
         className={`relative w-full h-full transition-transform duration-500 ${
-          isOpen ? "rotate-y-180" : ""
+          isOpen ? "rotate-y-180" : "" //jika terbuka, balik 180 derajat
         }`}
-        style={{ transformStyle: "preserve-3d" }}
+        style={{ transformStyle: "preserve-3d" }} //untuk efek 3D saat flipping
       >
 
         {/* kartu depan */}
@@ -80,7 +80,8 @@ function Card({ card, isFlipped, isMatched, onFlip }) {
             transform: "rotateY(180deg)",
             backfaceVisibility: "hidden",
           }}
-          //tampilin icon sesuai dengan data kartu, dengan animasi bounce saat dibuka
+          //animasi bounce saat dibuka
+          //tampilin icon sesuai dengan data kartu
         > 
           <span className={isFlipped ? "animate-bounce-once" : ""}>
             <IconComponent style={{ color: card.color }} />
